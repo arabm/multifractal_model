@@ -59,7 +59,9 @@ make_conf<-function(working_dir){
 #}
 
 # Currently used to retrieve data from the net.
-download_quote<-function(name,output_file){
+download_quote<-function(conf,name){
+    output_dir<-attr(conf,"input_dir")
+    output_file<-paste0(output_dir,"/",name,".csv",collapse="")
     start="1899-12-30"
     end="2017-01-01"
     quote<-get.hist.quote(instrument = name, start, end,
@@ -93,7 +95,7 @@ retrieve_data<-function(conf,quote_name){
     # Download quote if not yet on the disk
     if (! file.exists(input_csv)){
         #download_quote_quantmod(quote_name,source_name,input_csv)        
-        download_quote(quote_name,input_dir)
+        download_quote(conf,quote_name)
     }
     basename = paste0(output_dir,"/",quote_name,collapse="")
     ###
