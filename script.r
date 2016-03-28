@@ -433,6 +433,8 @@ example_arima<-function(conf,model){
     pdf(paste0(basename,"_pacf.pdf",collapse=""))
     pacf(s)
     dev.off()
+    
+    solve_arma(basename,s)
     return(s)
 }
 
@@ -494,7 +496,7 @@ example_uniform<-function(conf,n,a,b){
 #
 
 main_report<-function(working_dir="./",doLatex=TRUE)
-{   
+{
     conf<-conf_make(working_dir)
     report_dir<-conf_add_output_subdir(conf,"report")
     brewfile<-paste0(working_dir,"/template.brew",collapse="")
